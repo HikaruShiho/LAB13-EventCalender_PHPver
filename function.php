@@ -12,8 +12,10 @@ function dbConnection()
   $HOST = HOST;
   $USER = USER;
   $PASSWORD = PASSWORD;
+  $LOCALHOST_DB_NAME = LOCALHOST_DB_NAME;
+  $LOCALHOST_USER = LOCALHOST_USER;
   if ($_SERVER["HTTP_HOST"] == 'localhost') {
-    return new PDO("mysql:dbname=gs_db;charset=utf8;host=localhost", "root", "");
+    return new PDO("mysql:dbname={$LOCALHOST_DB_NAME};charset=utf8;host=localhost", "{$LOCALHOST_USER}", "");
   } else {
     return new PDO("mysql:dbname={$DB_NAME};charset=utf8;host={$HOST}", $USER, $PASSWORD);
   }
