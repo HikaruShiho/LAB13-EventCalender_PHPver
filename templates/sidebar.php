@@ -28,10 +28,10 @@
       <span>工事中・・・</span>
     </li>
   </ul>
-  <!-- <p>
+  <p>
     <input type="text" id="serch_schedule" placeholder="キーワードで検索">
   </p>
-  <p>
+  <!-- <p>
     <a id="download" href="./csv/sample.csv" download="sample.csv">CSVファイルダウンロード</a>
   </p>
   <p>

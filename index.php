@@ -48,9 +48,9 @@ $currentDate = date("Y年n月", strtotime($v['start_at']));
 $prevDate = date("Y年n月", strtotime($dataLsit[$k-1]['start_at']));
 if($currentDate !== $prevDate):
 ?>
-<li class="section"><span><?php echo $currentDate; ?></span></li>
+						<li class="section"><span><?php echo $currentDate; ?></span></li>
 <?php endif; ?>
-						<li data-title="<?php echo $v['title']; ?>">
+						<li class="schedule" data-title="<?php echo $v['title']; ?>">
 							<a href="./show.php?id=<?php echo $v['id']; ?>">
 								<dl style="background-color:<?php echo $v['color_code']; ?>">
 									<dt><?php echo date("n/j G:i", strtotime($v['start_at'])); ?> 〜 <?php echo date("n/j G:i", strtotime($v['end_at'])); ?><span style="color:<?php echo $v['color_code']; ?>"><?php echo $v['author']; ?></span></dt>

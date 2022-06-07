@@ -490,6 +490,7 @@ header .header_in>h1 {
 }
 
 #display_schedule_area>li.no_schedule {
+    display: none;
     font-size: 18px;
     text-align: center;
     padding-top: 38px;
