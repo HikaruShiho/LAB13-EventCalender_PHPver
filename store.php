@@ -19,8 +19,6 @@ if($_SERVER["REQUEST_METHOD"] === "POST") {
 			exit('DB Connection Error:' . $e->getMessage());
 		}
 
-		$sql = "INSERT INTO テーブル名(name, url, naiyo, date)VALUES(:name, :url, :naiyo, sysdate())";
-
 		$sql = "INSERT INTO schedules(title, start_at, end_at, place, url, author_id, color_id, description, update_at, create_at) VALUES(:title, :start_at, :end_at, :place, :url, :author_id, :color_id, :description, sysdate(), sysdate());";
 
 		$stmt = $pdo->prepare($sql);

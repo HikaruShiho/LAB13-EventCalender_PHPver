@@ -15,11 +15,10 @@ ORDER BY start_at;";
 $stmt = $pdo->prepare($sql);
 $status = $stmt->execute();
 
-if ($status == false) {
-  sqlError($stmt);
-} else {
-  $dataLsit = $stmt->fetchAll(PDO::FETCH_ASSOC);
-}
+$status == false ? sqlError($stmt) : $dataLsit = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// if(is_uploaded_file($_FILES['csv']['tmp_name'])) csvScan($_FILES['csv']['tmp_name']);
+
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -48,9 +47,9 @@ $currentDate = date("Y年n月", strtotime($v['start_at']));
 $prevDate = date("Y年n月", strtotime($dataLsit[$k-1]['start_at']));
 if($currentDate !== $prevDate):
 ?>
-						<li class="section"><span><?php echo $currentDate; ?></span></li>
+						<li class="section" data-title="" data-author=""><span><?php echo $currentDate; ?></span></li>
 <?php endif; ?>
-						<li class="schedule" data-title="<?php echo $v['title']; ?>">
+						<li class="schedule" data-title="<?php echo $v['title']; ?>" data-author="<?php echo $v['author']; ?>">
 							<a href="./show.php?id=<?php echo $v['id']; ?>">
 								<dl style="background-color:<?php echo $v['color_code']; ?>">
 									<dt><?php echo date("n/j G:i", strtotime($v['start_at'])); ?> 〜 <?php echo date("n/j G:i", strtotime($v['end_at'])); ?><span style="color:<?php echo $v['color_code']; ?>"><?php echo $v['author']; ?></span></dt>
@@ -59,6 +58,7 @@ if($currentDate !== $prevDate):
 							</a>
 						</li>
 <?php endforeach; ?>
+					<li class="no_schedule" data-title="###" data-author="">検索したスケジュールは見つかりませんでした</li>
 					</ul>
 				</div>
 			</div>

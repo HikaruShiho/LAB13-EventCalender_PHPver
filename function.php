@@ -134,8 +134,8 @@ function sqlError($stmt)
 }
 
 /**
- * SQLエラー表示
- * @param { PDOStatement } $stmt
+ * リダイレクトの処理
+ * @param { string } ./index.php
  * @return { Viod }
  */
 function redirect($path)
@@ -143,3 +143,50 @@ function redirect($path)
   header("Location: $path");
   exit();
 }
+
+/**
+ * csvでスケジュール一括登録
+ * @param { csv } $csvFile
+ * @return { Viod }
+ */
+// function csvScan($csvFile)
+// {
+//   try {
+//     $pdo = dbConnection();
+//   } catch (PDOException $e) {
+//     exit('DB Connection Error:' . $e->getMessage());
+//   }
+
+//   $sql = "INSERT INTO schedules(title, start_at, end_at, place, url, author_id, color_id, description, update_at, create_at) VALUES(:title, :start_at, :end_at, :place, :url, :author_id, :color_id, :description, sysdate(), sysdate());";
+
+//   $dataList = [];
+//   foreach (file($csvFile) as $k => $v) {
+//     if ($k == 0) continue;
+//     $dataList = explode(",", $v);
+//     echo "<pre>";
+//     var_dump($dataList);
+//     echo "</pre>";
+
+
+//     $title = $dataList[0];
+//     $start_at = $dataList[1] . " " . $dataList[2] . ":00";
+//     $end_at = $dataList[3] . " " . $dataList[4] . ":00";
+//     $place = $dataList[5];
+//     $url = $dataList[6];
+//     $author = $dataList[7];
+//     $color = $dataList[8];
+//     $description = $dataList[9];
+
+//     $stmt = $pdo->prepare($sql);
+//     $stmt->bindValue(':title', $title, PDO::PARAM_STR);
+//     $stmt->bindValue(':start_at', $start_at, PDO::PARAM_STR);
+//     $stmt->bindValue(':end_at', $end_at, PDO::PARAM_STR);
+//     $stmt->bindValue(':place', $place, PDO::PARAM_STR);
+//     $stmt->bindValue(':url', $url, PDO::PARAM_STR);
+//     $stmt->bindValue(':author_id', $author, PDO::PARAM_INT);
+//     $stmt->bindValue(':color_id', $color, PDO::PARAM_INT);
+//     $stmt->bindValue(':description', $description, PDO::PARAM_STR);
+//     $status = $stmt->execute();
+//     $status == false ? sqlError($stmt) : redirect("./index.php");
+//   }
+// }

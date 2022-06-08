@@ -24,21 +24,25 @@ const onEventsFunc = function () {
  */
 const searchSchedule = function () {
 	const keyword = this.value;
-	const $section = document.querySelectorAll("#display_schedule_area > li.section");
-	const $schedule = document.querySelectorAll("#display_schedule_area > li.schedule");
+	const $schedules = document.querySelectorAll("#display_schedule_area > li");
+	const $no_schedule = document.querySelector(".no_schedule");
+	$no_schedule.style.display = "none";
 	if (keyword) {
-		$section.forEach(function (e) { e.style.display = "none"; });
-		$schedule.forEach(function (e) {
-			e.style.display = "none";
-			let title = e.getAttribute("data-title");
-			if (title.indexOf(keyword.toLowerCase()) !== -1 ||
-				title.indexOf(keyword.toUpperCase()) !== -1) {
-				e.style.display = "block";
+		$schedules.forEach(e => e.style.display = "none");
+		const filter = Array.from($schedules).filter(e => {
+			const schedule_title = e.dataset.title;
+			const schedule_author = e.dataset.author;
+			if (schedule_title.indexOf(keyword.toLowerCase()) !== -1 ||
+				schedule_title.indexOf(keyword.toUpperCase()) !== -1 ||
+				schedule_author.indexOf(keyword.toLowerCase()) !== -1 ||
+				schedule_author.indexOf(keyword.toUpperCase()) !== -1) {
+				return e;
 			}
 		});
+		filter.length === 0 ? $no_schedule.style.display = "block" : filter.forEach(e => e.style.display = "block");
 	} else {
-		$schedule.forEach(function (e) { e.style.display = "block"; });
-		$section.forEach(function (e) { e.style.display = "block"; });
+		$schedules.forEach(e => e.style.display = "block");
+		$no_schedule.style.display = "none";
 	}
 }
 

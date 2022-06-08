@@ -35,7 +35,10 @@
     <a id="download" href="./csv/sample.csv" download="sample.csv">CSVファイルダウンロード</a>
   </p>
   <p>
-    <span>編集したCSVファイルを<br>アップロードしてください<br>↓↓↓</span>
-    <input type="file" multiple id="upload_csv" name="csv">
+    <form method="POST" enctype="multipart/form-data">
+      <span>編集したCSVファイルを<br>アップロードしてください<br>↓↓↓</span>
+      <input type="file" multiple id="upload_csv" name="csv">
+      <button type="submit">一括登録</button>
+    </form>
   </p> -->
 </nav>
