@@ -3,7 +3,7 @@
  * @return { void }
  * @param { void }
  */
-const init = function () {
+const init = () => {
 	screenLoading();
 	onEventsFunc();
 }
@@ -13,7 +13,7 @@ const init = function () {
  * @return { void }
  * @param { void }
  */
-const onEventsFunc = function () {
+const onEventsFunc = () => {
 	document.getElementById("serch_schedule").addEventListener("input", searchSchedule);
 }
 
@@ -22,7 +22,7 @@ const onEventsFunc = function () {
  * @return { void }
  * @param { void }
  */
-const searchSchedule = function () {
+const searchSchedule = () => {
 	const keyword = this.value;
 	const $schedules = document.querySelectorAll("#display_schedule_area > li");
 	const $no_schedule = document.querySelector(".no_schedule");
@@ -51,7 +51,7 @@ const searchSchedule = function () {
 * @return { void }
 * @param { void }
 */
-const screenLoading = function () {
+const screenLoading = () => {
 	if (sessionStorage.getItem("accessed")) {
 		document.getElementById("loading_screen").style.display = "none";
 	} else {
