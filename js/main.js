@@ -22,8 +22,8 @@ const onEventsFunc = () => {
  * @return { void }
  * @param { void }
  */
-const searchSchedule = () => {
-	const keyword = this.value;
+const searchSchedule = (e) => {
+	const keyword = e.target.value;
 	const $schedules = document.querySelectorAll("#display_schedule_area > li");
 	const $no_schedule = document.querySelector(".no_schedule");
 	$no_schedule.style.display = "none";
