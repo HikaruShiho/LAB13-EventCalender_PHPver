@@ -1,6 +1,9 @@
 <?php
 require "./function.php";
 
+session_start();
+checkLoginUser();
+
 $id = $_GET['id'];
 if($_SERVER["REQUEST_METHOD"] === "POST") {
 	$errors = validation($_POST);

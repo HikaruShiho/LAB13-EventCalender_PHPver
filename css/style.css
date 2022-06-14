@@ -562,7 +562,6 @@ header .header_in>h1 {
     Login
 ----------------------------*/
 #login {
-    display: none;
     width: 100%;
     height: 100%;
     background-color: #fff;
@@ -594,13 +593,13 @@ header .header_in>h1 {
 
 #login .login_in>p {
     width: 100%;
-    font-size: 18px;
+    font-size: 14px;
     text-align: center;
 }
 
 #login .login_in>ul {
     width: 100%;
-    padding-bottom: 16px;
+    padding-bottom: 8px;
 }
 
 #login .login_in>ul>li>dl>dt {
@@ -626,6 +625,10 @@ header .header_in>h1 {
     border: 2px solid #e1e1e1;
 }
 
+#login .login_in .btn_area {
+    padding-top: 8px;
+}
+
 #login_btn {
     display: block;
     width: 150px;
@@ -648,6 +651,65 @@ header .header_in>h1 {
 #error_message {
     font-size: 14px;
     color: #eb2222;
+}
+
+/*----------------------------
+    Admin screen
+----------------------------*/
+#admin {
+    width: 100%;
+    padding-top: 80px;
+}
+
+#admin .__sec_body__ {
+    max-width: 800px;
+}
+
+#admin .__sec_body__ table {
+    width: 100%;
+    border-top: 2px solid #e1e1e1;
+    font-size: 16px;
+    table-layout: fixed;
+}
+
+#admin .__sec_body__ table th {
+    background-color: #34aaff;
+    color: #fff;
+    text-align: center;
+    border-left: 2px solid #e1e1e1;
+    border-bottom: 2px solid #e1e1e1;
+    border-right: 2px solid #e1e1e1;
+}
+
+#admin .__sec_body__ table td {
+    text-align: center;
+    border-left: 2px solid #e1e1e1;
+    border-bottom: 2px solid #e1e1e1;
+    border-right: 2px solid #e1e1e1;
+}
+
+#admin .__sec_body__ table td a {
+    display: inline-block;
+    font-size: 14px;
+    color: #fff;
+    transition: all 300ms ease;
+    -webkit-transition: all 300ms ease;
+    -moz-transition: all 300ms ease;
+    -ms-transition: all 300ms ease;
+    padding-left: 16px;
+    padding-right: 16px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}
+
+#admin .__sec_body__ table td a.edit {
+    border: 2px solid #30892e;
+    background-color: #30892e;
+}
+
+#admin .__sec_body__ table td a.delete {
+    border: 2px solid #dc2b2b;
+    background-color: #dc2b2b;
 }
 
 /*----------------------------

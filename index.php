@@ -1,6 +1,8 @@
 <?php
 require "./function.php";
 
+session_start();
+checkLoginUser();
 try {
   $pdo = dbConnection();
 } catch (PDOException $e) {

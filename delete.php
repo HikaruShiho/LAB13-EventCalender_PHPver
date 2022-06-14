@@ -1,6 +1,9 @@
 <?php
 require "./function.php";
 
+session_start();
+checkLoginUser();
+
 $id = $_GET['id'];
 try {
 	$pdo = dbConnection();

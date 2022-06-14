@@ -1,5 +1,5 @@
 <?php
-require_once('./config.php');
+require(dirname(__FILE__) . '/config.php');
 
 /**
  * DBに接続
@@ -74,6 +74,31 @@ function getSchedule($id)
 }
 
 /**
+ * usersテーブルの1レコードを取得
+ * @param { Int } $id
+ * @return { Array }
+ */
+function getUser($id)
+{
+  try {
+    $pdo = dbConnection();
+  } catch (PDOException $e) {
+    exit('DB Connection Error:' . $e->getMessage());
+  }
+
+  $sql = "SELECT * FROM users WHERE id = :id;";
+  $stmt = $pdo->prepare($sql);
+  $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+  $status = $stmt->execute();
+
+  if ($status == false) {
+    sqlError($stmt);
+  } else {
+    return $stmt->fetch(PDO::FETCH_ASSOC);
+  }
+}
+
+/**
  * 入力された文字のエスケープ
  * @param { String } $_POST['xxxx']
  * @return { String }
@@ -123,9 +148,44 @@ function validation($inputValue)
 }
 
 /**
+ * ログインバリデーションチェック
+ * @param { String } $_POST['xxxx']
+ * @return { String }
+ */
+function validationLogin($inputValue)
+{
+  try {
+    $pdo = dbConnection();
+  } catch (PDOException $e) {
+    exit('DB Connection Error:' . $e->getMessage());
+  }
+  $sql = "SELECT COUNT(*) FROm users WHERE name = ${$inputValue['name']};";
+  $stmt = $pdo->prepare($sql);
+  $stmt->execute() ? sqlError($stmt) : $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
+  var_dump($users);
+
+
+
+
+
+  $errors = [];
+  if (empty($inputValue["name"])) {
+    $errors["name"] = "※IDを入力してください";
+  } else if (!preg_match("/^[a-zA-Z0-9]{5,100}$/", $inputValue["name"])) {
+    $errors["name"] = 'IDは英数字5文字以上100文字以下です';
+  }
+  if (empty($inputValue["password"])) {
+    $errors["password"] = "※パスワードを入力してください";
+  } else if (!preg_match("/^[a-zA-Z0-9]{8,100}$/", $inputValue["password"])) {
+    $errors["password"] = 'パスワードは英数字8文字以上100文字以下です';
+  }
+  return $errors;
+}
+
+/**
  * SQLエラー表示
- * @param { PDOStatement } $stmt
- * @return { Viod }
+ * @param { PDOstatement } $stmt
+ * @return { viod }
  */
 function sqlError($stmt)
 {
@@ -136,7 +196,7 @@ function sqlError($stmt)
 /**
  * リダイレクトの処理
  * @param { string } ./index.php
- * @return { Viod }
+ * @return { viod }
  */
 function redirect($path)
 {
@@ -145,9 +205,39 @@ function redirect($path)
 }
 
 /**
+ * ログインしているかのチェック
+ * @param { viod }
+ * @return { viod }
+ */
+function checkLoginUser()
+{
+  if (!isset($_SESSION["check_session"]) || $_SESSION["check_session"] != session_id()) {
+    redirect("./login.php");
+  } else {
+    session_regenerate_id(true);
+    $_SESSION["check_session"] = session_id();
+  }
+}
+
+/**
+ * 管理者ユーザーかチェック
+ * @param { viod }
+ * @return { viod }
+ */
+function checkLoginAdmin()
+{
+  if (!isset($_SESSION["check_session"]) || $_SESSION["check_session"] != session_id() || $_SESSION["admin_flag"] !== "1") {
+    redirect("/lab13_event_calender_ver2.0/login.php");
+  } else {
+    session_regenerate_id(true);
+    $_SESSION["check_session"] = session_id();
+  }
+}
+
+/**
  * csvでスケジュール一括登録
  * @param { csv } $csvFile
- * @return { Viod }
+ * @return { viod }
  */
 // function csvScan($csvFile)
 // {

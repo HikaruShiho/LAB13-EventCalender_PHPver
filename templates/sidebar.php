@@ -15,9 +15,24 @@
         <span>ホッと一息</span>
       </a>
     </li>
-    <li class="none">
-      <span id="logout_btn">ログアウト</span>
+<?php if(isset($_SESSION["check_session"])): ?>
+  <li>
+      <a href="./logout.php">
+        <span>ログアウト</span>
+      </a>
     </li>
+<?php else: ?>
+    <li>
+      <a href="./login.php">
+        <span>ログイン</span>
+      </a>
+    </li>
+    <li>
+      <a href="./register.php">
+        <span>サインイン</span>
+      </a>
+    </li>
+<?php endif; ?>
     <li class="none">
       <span>工事中・・・</span>
     </li>
